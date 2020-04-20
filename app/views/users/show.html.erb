@@ -1,0 +1,17 @@
+<h1><%= @user.email %>님의 마이페이지</h1>
+
+<h2>내가 작성한 글</h2>
+
+<% @user.posts.each do |post| %>
+  <%= post.title %>
+  <a href="/posts/<%= post.id %>/show">보기</a>
+  <hr>
+<% end %>
+
+<h2>내가 작성한 댓글</h2>
+
+<% @user.comments.each do |comment| %>
+  <%= comment.body %>
+  <a href="/posts/<%= comment.post.id %>/show">원본 글 보러가기</a>
+  <hr>
+<% end %>

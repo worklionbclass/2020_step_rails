@@ -1,0 +1,15 @@
+alert("댓글 생성이 완료되었습니다.");
+
+$("#comment_body").val("");
+
+$("#comment_lists").html(`
+  <% @post.comments.each do |comment| %>
+    <div id="comment_<%= comment.id %>">
+      작성자 : <%= comment.user.email %>
+      내용 : <%= comment.body %>
+      <a href="/comments/<%= comment.id %>/destroy" data-remote="true">삭제</a>
+      <hr>
+    </div>
+  <% end %>
+`);
+

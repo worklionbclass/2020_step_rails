@@ -1,0 +1,27 @@
+<%= @post.id %>번 글
+<hr>
+<p>작성자 : <%= @post.user.email %></p>
+<p>제목 : <%= @post.title %></p>
+<p>내용 : <%= @post.content %></p>
+<hr>
+<h3>댓글 작성</h3>
+<form action="/posts/<%= @post.id %>/comments/create" method="POST" data-remote="true">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  내용 : <input type="text" name="body" id="comment_body">
+  <button type="submit">제출</button>
+</form>
+
+<h3>댓글 리스트</h3>
+
+<div id="comment_lists">
+  <% @post.comments.each do |comment| %>
+    <div id="comment_<%= comment.id %>">
+      작성자 : <%= comment.user.email %>
+      내용 : <%= comment.body %>
+      <a href="/comments/<%= comment.id %>/destroy" data-remote="true">삭제</a>
+      <hr>
+    </div>
+  <% end %>
+</div>
+
+<a href="/">리스트로 이동</a>
